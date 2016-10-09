@@ -4,15 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using VCSKicksCollection;
 
 namespace uebung06 {
-    struct MyElement {
+    class MyElement : IComparable{
         public uint data;
         public char charA;
 
         public MyElement(uint data, char charA) {
             this.data = data;
             this.charA = charA;
+        }
+
+        public int CompareTo(object obj) {
+            MyElement other = (MyElement) obj;
+            return this.data.CompareTo(other.data);
         }
     }
 
@@ -35,6 +41,8 @@ namespace uebung06 {
             //**************************
             //ToDo: liste sortieren mit doppelten Werten, auslesen/removen beibehalten, double linked list, baum aufbauen
             //**************************
+
+        
 
             if (args.Length != 2) {
                 Console.WriteLine("Invalid Arguments! (Syntax: <file_to_analyse> <result_csv>)");
@@ -82,18 +90,24 @@ namespace uebung06 {
 
         private static HuffmanTree generateHuffmanTree(Dictionary<char, uint> dict) {
             HuffmanTree tree = new HuffmanTree();
-            SortedDictionary<uint, char> sortedFrequencies = new SortedDictionary<uint, char>(new MyComparer1());
+            PriorityQueue<MyElement> test = new PriorityQueue<MyElement>();
+            //SortedDictionary<uint, char> sortedFrequencies = new SortedDictionary<uint, char>(new MyComparer1());
             //SortedSet<MyElement> sortedFrequencies = new SortedSet<MyElement>(new MyComparer());
 
             foreach (char key in dict.Keys) {
-                sortedFrequencies.Add(dict[key], key);
+                test.Enqueue(new MyElement(dict[key], key));
+                //sortedFrequencies.Add(dict[key], key);
             }
 
             //MyElement test = sortedFrequencies.Last<MyElement>();
-
-            foreach (uint el in sortedFrequencies.Keys) {
-                Console.WriteLine("data:" + sortedFrequencies[el] + " | char:" + el);
+            while(test.Count > 0) {
+                MyElement el = test.Dequeue();
+                Console.WriteLine("data:" + el.data + " | char:" + el.charA);
             }
+
+            /*foreach (uint el in sortedFrequencies.Keys) {
+                Console.WriteLine("data:" + sortedFrequencies[el] + " | char:" + el);
+            }*/
 
             return tree;
         }
