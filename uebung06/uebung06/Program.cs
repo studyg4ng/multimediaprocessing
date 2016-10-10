@@ -6,48 +6,19 @@ using System.Threading.Tasks;
 using System.IO;
 using VCSKicksCollection;
 
-namespace uebung06 {
-    class MyElement : IComparable{
-        public uint data;
-        public char charA;
+namespace uebung06
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
 
-        public MyElement(uint data, char charA) {
-            this.data = data;
-            this.charA = charA;
-        }
-
-        public int CompareTo(object obj) {
-            MyElement other = (MyElement) obj;
-            return this.data.CompareTo(other.data);
-        }
-    }
-
-    class MyComparer : IComparer<MyElement> {
-        public int Compare(MyElement x, MyElement y) {
-            return x.data.CompareTo(y.data);
-        }
-    }
-
-    class MyComparer1 : IComparer<uint> {
-        public int Compare(uint x, uint y) {
-            if (x.CompareTo(y) == 0) return 1;
-            return x.CompareTo(y);
-        }
-    }
-
-    class Program {
-
-        public static void Main(string[] args) {
-            //**************************
-            //ToDo: liste sortieren mit doppelten Werten, auslesen/removen beibehalten, double linked list, baum aufbauen
-            //**************************
-
-        
-
-            if (args.Length != 2) {
+            if (args.Length != 2)
+            {
                 Console.WriteLine("Invalid Arguments! (Syntax: <file_to_analyse> <result_csv>)");
             }
-            else {
+            else
+            {
                 string fileContent = getFileContent(@args[0]);
                 Dictionary<char, uint> myContent = getCharAbsFrequency(fileContent);
                 generateHuffmanTree(myContent);
@@ -71,7 +42,8 @@ namespace uebung06 {
             }*/
         }
 
-        private static bool doTests() {
+        private static bool doTests()
+        {
             string inputFile = @"../../test/input.txt";
             string outputFile = @"../../test/output.csv";
 
@@ -88,39 +60,52 @@ namespace uebung06 {
             return true;
         }
 
-        private static HuffmanTree generateHuffmanTree(Dictionary<char, uint> dict) {
+        private Dictionary<char, string> generateHuffmanCodeTable(HuffmanTree tree)
+        {
+            Dictionary<char, string> huffmanTable = new Dictionary<char, string>();
+            return huffmanTable;
+        }
+
+        private static HuffmanTree generateHuffmanTree(Dictionary<char, uint> dict)
+        {
             HuffmanTree tree = new HuffmanTree();
-            PriorityQueue<MyElement> test = new PriorityQueue<MyElement>();
-            //SortedDictionary<uint, char> sortedFrequencies = new SortedDictionary<uint, char>(new MyComparer1());
-            //SortedSet<MyElement> sortedFrequencies = new SortedSet<MyElement>(new MyComparer());
+            PriorityQueue<HuffmanNode> queue = new PriorityQueue<HuffmanNode>();
 
-            foreach (char key in dict.Keys) {
-                test.Enqueue(new MyElement(dict[key], key));
-                //sortedFrequencies.Add(dict[key], key);
+            foreach (char key in dict.Keys)
+            {
+                queue.Enqueue(new HuffmanNode(dict[key], key));
             }
 
-            //MyElement test = sortedFrequencies.Last<MyElement>();
-            while(test.Count > 0) {
-                MyElement el = test.Dequeue();
-                Console.WriteLine("data:" + el.data + " | char:" + el.charA);
+            while (queue.Count() > 1)
+            {
+                HuffmanNode num1 = queue.Dequeue();
+                HuffmanNode num2 = queue.Dequeue();
+                HuffmanNode parentNode = new HuffmanNode(num1.data + num2.data, '*');
+
+                parentNode.leftChild = num1;
+                parentNode.rightChild = num2;
+                queue.Enqueue(parentNode);
+                // Console.WriteLine("data:" + num1.data + " | char:" + num1.charA);
             }
 
-            /*foreach (uint el in sortedFrequencies.Keys) {
-                Console.WriteLine("data:" + sortedFrequencies[el] + " | char:" + el);
-            }*/
+            tree.root = queue.Dequeue();
 
             return tree;
         }
 
         #region Logic
-        private static Dictionary<char, uint> getCharAbsFrequency(string input) {
+        private static Dictionary<char, uint> getCharAbsFrequency(string input)
+        {
             Dictionary<char, uint> dict = new Dictionary<char, uint>();
 
-            foreach (char c in input) {
-                if (!dict.ContainsKey(c)) {
+            foreach (char c in input)
+            {
+                if (!dict.ContainsKey(c))
+                {
                     dict.Add(c, 1);
                 }
-                else {
+                else
+                {
                     dict[c]++;
                 }
             }
@@ -128,11 +113,13 @@ namespace uebung06 {
             return dict;
         }
 
-        private static Dictionary<char, double> getCharEntropy(Dictionary<char, uint> absDict, int charCount) {
+        private static Dictionary<char, double> getCharEntropy(Dictionary<char, uint> absDict, int charCount)
+        {
             Dictionary<char, double> dict = new Dictionary<char, double>();
             double tmp;
 
-            foreach (char key in absDict.Keys) {
+            foreach (char key in absDict.Keys)
+            {
                 tmp = ((double)absDict[key] / charCount);
                 dict[key] = -tmp * Math.Log(tmp); // percentage
             }
@@ -142,32 +129,40 @@ namespace uebung06 {
         #endregion
 
         #region FileIO
-        private static string generateCSVString(Dictionary<char, double> dict) {
+        private static string generateCSVString(Dictionary<char, double> dict)
+        {
             StringBuilder builder = new StringBuilder();
 
-            foreach (char key in dict.Keys) {
+            foreach (char key in dict.Keys)
+            {
                 builder.Append(String.Format("{0} [{1}];{2}\n", key, (int)key, dict[key]));
             }
 
             return builder.ToString();
         }
 
-        private static string getFileContent(string filePath) {
+        private static string getFileContent(string filePath)
+        {
             string content = "";
-            if (File.Exists(filePath)) {
-                using (StreamReader reader = new StreamReader(filePath)) {
+            if (File.Exists(filePath))
+            {
+                using (StreamReader reader = new StreamReader(filePath))
+                {
                     content = reader.ReadToEnd();
                     return content;
                 }
             }
-            else {
+            else
+            {
                 throw new FileNotFoundException(String.Format("File [{0}] not Found!", filePath));
             }
         }
 
-        private static void writeOutputFile(string filePath, string content) {
+        private static void writeOutputFile(string filePath, string content)
+        {
             if (File.Exists(filePath)) File.Delete(filePath);
-            using (StreamWriter writer = new StreamWriter(filePath)) {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
                 writer.Write(content);
                 writer.Flush();
             }
