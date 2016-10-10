@@ -20,18 +20,16 @@ namespace uebung06
         private int LeftChildIdx(int idx)
         {
             return (2 * idx + 1);
-            // What happens if no left child exists ?
         }
 
         // returns the index of the right child
         private static int RightChildIdx(int idx)
         {
             return (2 * idx + 2);
-            // What happens if no right child exists ?
         }
 
         // get the largest element
-        public T Front()
+        public T First()
         {
             if (IsEmpty()) throw new InvalidOperationException(" Empty !");
             return arr[0];

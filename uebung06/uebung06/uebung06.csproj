@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="HuffmanTree.cs" />
     <Compile Include="PriorityQueue.cs" />
-    <Compile Include="PriorityQueue_VCSKicks.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

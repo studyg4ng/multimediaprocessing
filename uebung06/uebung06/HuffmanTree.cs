@@ -11,30 +11,23 @@ namespace uebung06
     {
         public HuffmanNode leftChild;
         public HuffmanNode rightChild;
-        // public HuffmanNode parent;
+        public string path;
+        public bool isLeaf;
 
         public uint data; // frequency
-        public char charA; // own char or *
+        public char charA;
 
-        public HuffmanNode(uint data, char charA)
+        public HuffmanNode(uint data, char charA, bool isLeaf)
         {
             this.data = data;
             this.charA = charA;
+            this.isLeaf = isLeaf;
         }
 
         public int CompareTo(object obj)
         {
             HuffmanNode other = (HuffmanNode)obj;
-            return this.data.CompareTo(other.data);
-        }
-
-    }
-
-    class HuffmanNodeComparer : IComparer<HuffmanNode>
-    {
-        public int Compare(HuffmanNode x, HuffmanNode y)
-        {
-            return x.data.CompareTo(y.data);
+            return this.data.CompareTo(other.data); // uint implementation
         }
     }
 
@@ -42,23 +35,33 @@ namespace uebung06
     {
         public HuffmanNode root;
 
-        public List<HuffmanNode> toList()
+        public Dictionary<char, string> generateDictionary()
         {
-            List<HuffmanNode> nodes = new List<HuffmanNode>();
+            Dictionary<char, string> dict = new Dictionary<char, string>();
             Stack<HuffmanNode> nodeStack = new Stack<HuffmanNode>();
+            HuffmanNode currentNode;
 
             nodeStack.Push(root);
 
             while (!(nodeStack.Count == 0))
             {
-                HuffmanNode currentNode = nodeStack.Pop();
-                if (currentNode.charA != '*') nodes.Add(currentNode);
-
-                if (currentNode.leftChild != null) nodeStack.Push(currentNode.leftChild);
-                if (currentNode.rightChild != null) nodeStack.Push(currentNode.rightChild);
+                currentNode = nodeStack.Pop();
+                if (currentNode.isLeaf) dict.Add(currentNode.charA, currentNode.path);
+                else
+                {
+                    if (currentNode.leftChild != null)
+                    {
+                        currentNode.leftChild.path = currentNode.path + "0";
+                        nodeStack.Push(currentNode.leftChild);
+                    }
+                    if (currentNode.rightChild != null)
+                    {
+                        currentNode.rightChild.path = currentNode.path + "1";
+                        nodeStack.Push(currentNode.rightChild);
+                    }
+                }
             }
-
-            return nodes;
+            return dict;
         }
     }
 }

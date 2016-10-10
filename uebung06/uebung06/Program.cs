@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using VCSKicksCollection;
 
 namespace uebung06
 {
@@ -12,80 +11,81 @@ namespace uebung06
     {
         public static void Main(string[] args)
         {
-
-            if (args.Length != 2)
+            if (!doTests())
             {
-                Console.WriteLine("Invalid Arguments! (Syntax: <file_to_analyse> <result_csv>)");
+                Console.WriteLine("Test failed!");
             }
             else
             {
-                string fileContent = getFileContent(@args[0]);
-                Dictionary<char, uint> myContent = getCharAbsFrequency(fileContent);
-                generateHuffmanTree(myContent);
-                Console.ReadKey();
-            }
-
-            /*if (!doTests()) {
-                Console.WriteLine("Test failed!");
-            }
-            else {
-                if (args.Length != 2) {
-                    Console.WriteLine("Invalid Arguments! (Syntax: <file_to_analyse> <result_csv>)");
+                if (args.Length != 2)
+                {
+                    Console.WriteLine("Invalid Arguments! (Syntax: <file_to_analyse> <result_txt>)");
                 }
-                else {
+                else
+                {
                     string fileContent = getFileContent(@args[0]);
-                    string csv = generateCSVString(getCharEntropy(getCharAbsFrequency(fileContent), fileContent.Length));
-                    writeOutputFile(@args[1], csv);
+                    Dictionary<char, uint> myContent = getCharAbsFrequency(fileContent);
+                    HuffmanTree tree = generateHuffmanTree(myContent);
+                    string huffmanCode = generateHuffmanCode(fileContent, tree.generateDictionary());
+                    writeOutputFile(@args[1], huffmanCode);
                     Console.WriteLine("FINISHED. Please press a key!");
                     Console.ReadKey();
                 }
-            }*/
+            }
         }
 
         private static bool doTests()
         {
             string inputFile = @"../../test/input.txt";
-            string outputFile = @"../../test/output.csv";
+            string outputFile = @"../../test/output.txt";
 
             if (getFileContent(inputFile).Length == 0) return false;
             string fileContent = getFileContent(inputFile);
             Dictionary<char, uint> dict = getCharAbsFrequency(fileContent);
 
-            if (dict.Count != 4) return false;
+            if (dict.Count != 8) return false;
             if (dict['d'] != 2) return false;
-            //if (getCharEntropy(dict, fileContent.Length)['a'] != 20) return false;
             if (File.Exists(outputFile)) File.Delete(outputFile); // Delete previous generated test outputFile
-            writeOutputFile(outputFile, "test1123");
+            writeOutputFile(outputFile, "testing ...");
             if (!File.Exists(outputFile)) return false;
             return true;
         }
 
-        private Dictionary<char, string> generateHuffmanCodeTable(HuffmanTree tree)
+        private static string generateHuffmanCode(string input, Dictionary<char, string> codeTable)
         {
-            Dictionary<char, string> huffmanTable = new Dictionary<char, string>();
-            return huffmanTable;
+            string code = "";
+
+            foreach (char c in input)
+            {
+                code += codeTable[c];
+            }
+            return code;
         }
 
         private static HuffmanTree generateHuffmanTree(Dictionary<char, uint> dict)
         {
             HuffmanTree tree = new HuffmanTree();
+            HuffmanNode parentNode;
+            HuffmanNode leftNode;
+            HuffmanNode rightNode;
+
             PriorityQueue<HuffmanNode> queue = new PriorityQueue<HuffmanNode>();
 
             foreach (char key in dict.Keys)
             {
-                queue.Enqueue(new HuffmanNode(dict[key], key));
+                queue.Enqueue(new HuffmanNode(dict[key], key, true));
+                // Console.WriteLine("Data: {0}, Char: {1}", dict[key], key);
             }
 
             while (queue.Count() > 1)
             {
-                HuffmanNode num1 = queue.Dequeue();
-                HuffmanNode num2 = queue.Dequeue();
-                HuffmanNode parentNode = new HuffmanNode(num1.data + num2.data, '*');
+                leftNode = queue.Dequeue();
+                rightNode = queue.Dequeue();
+                parentNode = new HuffmanNode(leftNode.data + rightNode.data, new char(), false);
 
-                parentNode.leftChild = num1;
-                parentNode.rightChild = num2;
+                parentNode.leftChild = leftNode;
+                parentNode.rightChild = rightNode;
                 queue.Enqueue(parentNode);
-                // Console.WriteLine("data:" + num1.data + " | char:" + num1.charA);
             }
 
             tree.root = queue.Dequeue();
@@ -93,7 +93,6 @@ namespace uebung06
             return tree;
         }
 
-        #region Logic
         private static Dictionary<char, uint> getCharAbsFrequency(string input)
         {
             Dictionary<char, uint> dict = new Dictionary<char, uint>();
@@ -109,36 +108,7 @@ namespace uebung06
                     dict[c]++;
                 }
             }
-
             return dict;
-        }
-
-        private static Dictionary<char, double> getCharEntropy(Dictionary<char, uint> absDict, int charCount)
-        {
-            Dictionary<char, double> dict = new Dictionary<char, double>();
-            double tmp;
-
-            foreach (char key in absDict.Keys)
-            {
-                tmp = ((double)absDict[key] / charCount);
-                dict[key] = -tmp * Math.Log(tmp); // percentage
-            }
-
-            return dict;
-        }
-        #endregion
-
-        #region FileIO
-        private static string generateCSVString(Dictionary<char, double> dict)
-        {
-            StringBuilder builder = new StringBuilder();
-
-            foreach (char key in dict.Keys)
-            {
-                builder.Append(String.Format("{0} [{1}];{2}\n", key, (int)key, dict[key]));
-            }
-
-            return builder.ToString();
         }
 
         private static string getFileContent(string filePath)
@@ -167,6 +137,5 @@ namespace uebung06
                 writer.Flush();
             }
         }
-        #endregion
     }
 }
