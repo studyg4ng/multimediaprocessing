@@ -5,22 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace uebung06
-{
-    class Program
-    {
-        public static void Main(string[] args)
-        {
-            if (!doTests())
-            {
-                Console.WriteLine("Test failed!");
-            }
+namespace uebung06 {
+    class Program {
+        public static void Main(string[] args) {
+            if (!doTests()) Console.WriteLine("Test failed!");
             else
             {
-                if (args.Length != 2)
-                {
-                    Console.WriteLine("Invalid Arguments! (Syntax: <file_to_analyse> <result_txt>)");
-                }
+                if (args.Length != 2) Console.WriteLine("Invalid Arguments! (Syntax: <file_to_analyse> <result_txt>)");
                 else
                 {
                     string fileContent = getFileContent(@args[0]);
@@ -34,8 +25,7 @@ namespace uebung06
             }
         }
 
-        private static bool doTests()
-        {
+        private static bool doTests() {
             string inputFile = @"../../test/input.txt";
             string outputFile = @"../../test/output.txt";
 
@@ -51,19 +41,15 @@ namespace uebung06
             return true;
         }
 
-        private static string generateHuffmanCode(string input, Dictionary<char, string> codeTable)
-        {
+        private static string generateHuffmanCode(string input, Dictionary<char, string> codeTable) {
             string code = "";
 
-            foreach (char c in input)
-            {
-                code += codeTable[c];
-            }
+            foreach (char c in input) code += codeTable[c];
+
             return code;
         }
 
-        private static HuffmanTree generateHuffmanTree(Dictionary<char, uint> dict)
-        {
+        private static HuffmanTree generateHuffmanTree(Dictionary<char, uint> dict) {
             HuffmanTree tree = new HuffmanTree();
             HuffmanNode parentNode;
             HuffmanNode leftNode;
@@ -89,30 +75,21 @@ namespace uebung06
             }
 
             tree.root = queue.Dequeue();
-
             return tree;
         }
 
-        private static Dictionary<char, uint> getCharAbsFrequency(string input)
-        {
+        private static Dictionary<char, uint> getCharAbsFrequency(string input) {
             Dictionary<char, uint> dict = new Dictionary<char, uint>();
 
             foreach (char c in input)
             {
-                if (!dict.ContainsKey(c))
-                {
-                    dict.Add(c, 1);
-                }
-                else
-                {
-                    dict[c]++;
-                }
+                if (!dict.ContainsKey(c)) dict.Add(c, 1);
+                else dict[c]++;
             }
             return dict;
         }
 
-        private static string getFileContent(string filePath)
-        {
+        private static string getFileContent(string filePath) {
             string content = "";
             if (File.Exists(filePath))
             {
@@ -122,14 +99,10 @@ namespace uebung06
                     return content;
                 }
             }
-            else
-            {
-                throw new FileNotFoundException(String.Format("File [{0}] not Found!", filePath));
-            }
+            else throw new FileNotFoundException(String.Format("File [{0}] not Found!", filePath));
         }
 
-        private static void writeOutputFile(string filePath, string content)
-        {
+        private static void writeOutputFile(string filePath, string content) {
             if (File.Exists(filePath)) File.Delete(filePath);
             using (StreamWriter writer = new StreamWriter(filePath))
             {

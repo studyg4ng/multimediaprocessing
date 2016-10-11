@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace uebung06
-{
-    class HuffmanNode : IComparable
-    {
+namespace uebung06 {
+    class HuffmanNode : IComparable {
         public HuffmanNode leftChild;
         public HuffmanNode rightChild;
         public string path;
@@ -17,26 +15,22 @@ namespace uebung06
         public uint data; // frequency
         public char charA;
 
-        public HuffmanNode(uint data, char charA, bool isLeaf)
-        {
+        public HuffmanNode(uint data, char charA, bool isLeaf) {
             this.data = data;
             this.charA = charA;
             this.isLeaf = isLeaf;
         }
 
-        public int CompareTo(object obj)
-        {
+        public int CompareTo(object obj) {
             HuffmanNode other = (HuffmanNode)obj;
-            return this.data.CompareTo(other.data); // uint implementation
+            return this.data.CompareTo(other.data);
         }
     }
 
-    class HuffmanTree
-    {
+    class HuffmanTree {
         public HuffmanNode root;
 
-        public Dictionary<char, string> generateDictionary()
-        {
+        public Dictionary<char, string> generateDictionary() {
             Dictionary<char, string> dict = new Dictionary<char, string>();
             Stack<HuffmanNode> nodeStack = new Stack<HuffmanNode>();
             HuffmanNode currentNode;
