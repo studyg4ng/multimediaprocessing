@@ -11,21 +11,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace uebung04
-{
-    class Program
-    {
-        public static void Main(string[] args)
-        {
-            if(!doTests())
+namespace uebung01 {
+    class Program {
+        public static double checkSum = 0d;
+
+        public static void Main(string[] args) {
+            if (!doTests())
             {
                 Console.WriteLine("Test failed!");
-            } else
+            }
+            else
             {
-                if(args.Length != 2)
+                if (args.Length != 2)
                 {
                     Console.WriteLine("Invalid Arguments! (Syntax: <file_to_analyse> <result_csv>)");
-                } else
+                }
+                else
                 {
                     string fileContent = getFileContent(@args[0]);
                     string csv = generateCSVString(getCharRelFrequency(getCharAbsFrequency(fileContent), fileContent.Length));
@@ -36,8 +37,7 @@ namespace uebung04
             }
         }
 
-        private static bool doTests()
-        {
+        private static bool doTests() {
             string inputFile = @"../../test/input.txt";
             string outputFile = @"../../test/output.csv";
 
@@ -54,28 +54,27 @@ namespace uebung04
             return true;
         }
 
-        private static string generateCSVString(Dictionary<char, double> dict)
-        {
+        private static string generateCSVString(Dictionary<char, double> dict) {
             StringBuilder builder = new StringBuilder();
 
-            foreach(char key in dict.Keys)
+            foreach (char key in dict.Keys)
             {
-                builder.Append(String.Format("{0} [{1}];{2}%\n", key, (int) key, dict[key]));
+                builder.Append(String.Format("{0} [{1}]; {2}% \n", key, (int)key, dict[key]));
             }
 
-            return builder.ToString(); 
+            return builder.ToString();
         }
 
-        private static Dictionary<char, uint> getCharAbsFrequency(string input)
-        {
+        private static Dictionary<char, uint> getCharAbsFrequency(string input) {
             Dictionary<char, uint> dict = new Dictionary<char, uint>();
 
             foreach (char c in input)
             {
-                if(!dict.ContainsKey(c))
+                if (!dict.ContainsKey(c))
                 {
-                    dict.Add(c,1);
-                } else
+                    dict.Add(c, 1);
+                }
+                else
                 {
                     dict[c]++;
                 }
@@ -84,20 +83,19 @@ namespace uebung04
             return dict;
         }
 
-        private static Dictionary<char, double> getCharRelFrequency(Dictionary<char,uint> absDict, int charCount)
-        {
+        private static Dictionary<char, double> getCharRelFrequency(Dictionary<char, uint> absDict, int charCount) {
             Dictionary<char, double> dict = new Dictionary<char, double>();
 
             foreach (char key in absDict.Keys)
             {
-                dict[key] = ((double) absDict[key] / charCount) * 100; // percentage
+                dict[key] = ((double)absDict[key] / charCount) * 100; // percentage
+                checkSum += dict[key];
             }
 
             return dict;
         }
 
-        private static string getFileContent(string filePath)
-        {
+        private static string getFileContent(string filePath) {
             string content = "";
             if (File.Exists(filePath))
             {
@@ -107,17 +105,18 @@ namespace uebung04
                     return content;
                 }
             }
-            else {
+            else
+            {
                 throw new FileNotFoundException(String.Format("File [{0}] not Found!", filePath));
             }
         }
 
-        private static void writeOutputFile(string filePath, string content)
-        {
+        private static void writeOutputFile(string filePath, string content) {
             if (File.Exists(filePath)) File.Delete(filePath);
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 writer.Write(content);
+                writer.Write(String.Format("; CheckSum: {0:00.00}% ", (checkSum / 2))); // divided because of the executed test method --> 200%
                 writer.Flush();
             }
         }

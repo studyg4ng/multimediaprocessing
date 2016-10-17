@@ -7,8 +7,8 @@
     <ProjectGuid>{7CE50935-A628-4059-9F25-B93637A1DB51}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>uebung01</RootNamespace>
-    <AssemblyName>uebung01</AssemblyName>
+    <RootNamespace>uebung05</RootNamespace>
+    <AssemblyName>uebung05</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
