@@ -117,7 +117,7 @@ namespace uebung05 {
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 writer.Write(content);
-                writer.Write(String.Format("; Entropy: {0:00.00} ", -entropy)); // divided because of the executed test method --> 2x
+                writer.Write(String.Format("; Entropy: {0:00.00} ", -entropy));
                 writer.Flush();
             }
         }
