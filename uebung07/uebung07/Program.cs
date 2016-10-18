@@ -18,6 +18,12 @@ namespace uebung07 {
 
             MSECalculator calculatorOriginal = new MSECalculator(@"../../media/Lena.png", @"../../media/Lena_q5.jpg");
             calculatorOriginal.printMSE();
+
+            MSECalculator calculatorBlackWhite = new MSECalculator(@"../../media/black.jpg", @"../../media/white.jpg");
+            calculatorBlackWhite.printMSE();
+
+            MSECalculator calculatorSame = new MSECalculator(@"../../media/Lena.png", @"../../media/Lena.png");
+            calculatorSame.printMSE();
         }
     }
 }

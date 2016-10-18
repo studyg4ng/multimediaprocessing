@@ -36,6 +36,7 @@ namespace uebung07 {
                     diffRed = Math.Abs(colorA.R - colorB.R);
                     diffGreen = Math.Abs(colorA.G - colorB.G);
                     diffBlue = Math.Abs(colorA.B - colorB.B);
+                    //if ((diffBlue != 255) || (diffGreen != 255) || (diffBlue != 255)) Console.WriteLine("NONONO");
 
                     squareDiff += Math.Pow(diffRed, 2) + Math.Pow(diffGreen, 2) + Math.Pow(diffBlue, 2);
                 }
@@ -46,7 +47,7 @@ namespace uebung07 {
         }
 
         public void printMSE() {
-            Console.WriteLine("MSE: {0:00.000000}", calculateMSE());
+            Console.WriteLine("MSE: {0:00.00}", calculateMSE());
         }
     }
 }

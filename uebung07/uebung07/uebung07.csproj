@@ -52,6 +52,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="media\black.jpg" />
+    <Content Include="media\Lena.png" />
+    <Content Include="media\Lena_q10.jpg" />
+    <Content Include="media\Lena_q5.jpg" />
+    <Content Include="media\white.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
