@@ -28,28 +28,25 @@ namespace uebung07 {
         public double calculateMSE() {
             double diffRed, diffGreen, diffBlue, squareDiff = 0, mse = 0;
 
-            for (int i = 0; i < _imageA.Width; i++) {
-                for(int j = 0; i < _imageA.Height; j++) {
-                    Color colorA = _imageA.GetPixel(i, j);
-                    Color colorB = _imageB.GetPixel(i, j);
+            for (int x = 0; x < _imageA.Width; x++) {
+                for(int y = 0; y < _imageA.Height; y++) {
+                    Color colorA = _imageA.GetPixel(x, y);
+                    Color colorB = _imageB.GetPixel(x, y);
 
-                    diffRed = colorA.R - colorB.R;
-                    diffGreen = colorA.G - colorB.G;
-                    diffBlue = colorA.B - colorB.B;
+                    diffRed = Math.Abs(colorA.R - colorB.R);
+                    diffGreen = Math.Abs(colorA.G - colorB.G);
+                    diffBlue = Math.Abs(colorA.B - colorB.B);
 
                     squareDiff += Math.Pow(diffRed, 2) + Math.Pow(diffGreen, 2) + Math.Pow(diffBlue, 2);
                 }
             }
 
             mse = squareDiff / (_imageA.Width * _imageA.Height);
-
             return mse;
         }
 
-        public void printPSE() {
-            Console.WriteLine("MSE: {0}", calculateMSE());
+        public void printMSE() {
+            Console.WriteLine("MSE: {0:00.000000}", calculateMSE());
         }
-
-        // output (write file or console)
     }
 }
