@@ -21,8 +21,8 @@ namespace uebung07 {
         public MSECalculator(string filePath1, string filePath2) {
             this._inputFilePath1 = filePath1;
             this._inputFilePath2 = filePath1;
-            _imageA = (Bitmap)Image.FromFile(filePath1);
-            _imageB = (Bitmap)Image.FromFile(filePath2);
+            _imageA = (Bitmap) FileIO.getImageFromFile(filePath1);
+            _imageB = (Bitmap) FileIO.getImageFromFile(filePath2);
         }
 
         public double calculateMSE() {
