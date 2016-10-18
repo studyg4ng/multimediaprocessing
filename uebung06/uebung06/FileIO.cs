@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*1510601027 fhs38532
+  Thomas Siller
+  -------------------
+  1510601032 fhs38596
+  Patrick Obermüller*/
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,8 +15,8 @@ namespace ObSi {
     class FileIO {
         public static string getFileContent(string filePath) {
             string content = "";
-            if(File.Exists(filePath)) {
-                using(StreamReader reader = new StreamReader(filePath)) {
+            if (File.Exists(filePath)) {
+                using (StreamReader reader = new StreamReader(filePath)) {
                     content = reader.ReadToEnd();
                     return content;
                 }
@@ -19,8 +25,8 @@ namespace ObSi {
         }
 
         public static void writeOutputFile(string filePath, string content) {
-            if(File.Exists(filePath)) File.Delete(filePath);
-            using(StreamWriter writer = new StreamWriter(filePath)) {
+            if (File.Exists(filePath)) File.Delete(filePath);
+            using (StreamWriter writer = new StreamWriter(filePath)) {
                 writer.Write(content);
                 writer.Flush();
             }

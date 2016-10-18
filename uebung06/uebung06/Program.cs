@@ -15,8 +15,7 @@ namespace uebung06 {
     class Program {
         public static void Main(string[] args) {
             if (args.Length != 2) Console.WriteLine("Invalid Arguments! (Syntax: <file_to_analyse> <result_txt>)");
-            else
-            {
+            else {
                 HuffmanGenerator huffGen = new HuffmanGenerator(args[0], args[1]);
                 HuffmanTree tree = huffGen.generateHuffmanTree();
                 huffGen.WriteHuffmanTreeToFile();

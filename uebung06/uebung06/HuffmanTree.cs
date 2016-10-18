@@ -43,20 +43,16 @@ namespace uebung06 {
 
             nodeStack.Push(root);
 
-            while (!(nodeStack.Count == 0))
-            {
+            while (!(nodeStack.Count == 0)) {
                 currentNode = nodeStack.Pop();
                 if (currentNode.isLeaf) dict.Add(currentNode.charA, currentNode.path);
-                else
-                {
-                    if (currentNode.leftChild != null)
-                    {
-                        currentNode.leftChild.path = currentNode.path + "0";
+                else {
+                    if (currentNode.leftChild != null) {
+                        currentNode.leftChild.path = currentNode.path + '0';
                         nodeStack.Push(currentNode.leftChild);
                     }
-                    if (currentNode.rightChild != null)
-                    {
-                        currentNode.rightChild.path = currentNode.path + "1";
+                    if (currentNode.rightChild != null) {
+                        currentNode.rightChild.path = currentNode.path + '1';
                         nodeStack.Push(currentNode.rightChild);
                     }
                 }
