@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*1510601027 fhs38532
+  Thomas Siller
+  -------------------
+  1510601032 fhs38596
+  Patrick Obermüller*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +13,7 @@ using ObSi;
 
 namespace uebung06 {
     class HuffmanGenerator {
-        string _inputFilePath, _outputFilePath;
+        private string _inputFilePath, _outputFilePath;
 
         public HuffmanGenerator(string inputFilePath, string outputFilePath) {
             this._inputFilePath = inputFilePath;
@@ -19,7 +25,7 @@ namespace uebung06 {
             Dictionary<char, string> codeTable = tree.generateDictionary();
             string code = "";
 
-            foreach(char c in getFileContent(this._inputFilePath)) code += codeTable[c];
+            foreach (char c in getFileContent(this._inputFilePath)) code += codeTable[c];
 
             return code;
         }
@@ -33,13 +39,13 @@ namespace uebung06 {
             PriorityQueue<HuffmanNode> queue = new PriorityQueue<HuffmanNode>();
             string inputFileContent = getFileContent(this._inputFilePath);
             Dictionary<char, uint> dict = getCharAbsFrequency(inputFileContent);
-            
-            foreach(char key in dict.Keys) {
+
+            foreach (char key in dict.Keys) {
                 queue.Enqueue(new HuffmanNode(dict[key], key, true));
                 // Console.WriteLine("Data: {0}, Char: {1}", dict[key], key);
             }
 
-            while(queue.Count() > 1) {
+            while (queue.Count() > 1) {
                 leftNode = queue.Dequeue();
                 rightNode = queue.Dequeue();
                 parentNode = new HuffmanNode(leftNode.data + rightNode.data, new char(), false);
@@ -56,8 +62,8 @@ namespace uebung06 {
         private Dictionary<char, uint> getCharAbsFrequency(string input) {
             Dictionary<char, uint> dict = new Dictionary<char, uint>();
 
-            foreach(char c in input) {
-                if(!dict.ContainsKey(c)) dict.Add(c, 1);
+            foreach (char c in input) {
+                if (!dict.ContainsKey(c)) dict.Add(c, 1);
                 else dict[c]++;
             }
             return dict;
