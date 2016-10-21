@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,11 @@ namespace uebung07 {
 
             MSECalculator calculatorBlackWhite = new MSECalculator(@"../../media/black.jpg", @"../../media/white.jpg");
             calculatorBlackWhite.printMSE();
-
+            Debug.Assert(calculatorBlackWhite.calculateMSE() == 255);
+            
             MSECalculator calculatorSame = new MSECalculator(@"../../media/Lena.png", @"../../media/Lena.png");
             calculatorSame.printMSE();
+            Debug.Assert(calculatorSame.calculateMSE() == 0);
         }
     }
 }

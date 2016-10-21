@@ -26,7 +26,7 @@ namespace uebung07 {
         }
 
         public double calculateMSE() {
-            double diffRed, diffGreen, diffBlue, squareDiff = 0, mse = 0;
+            double diffRed, diffGreen, diffBlue, squareDiff = 0, mse = 0, pixels;
 
             for (int x = 0; x < _imageA.Width; x++) {
                 for(int y = 0; y < _imageA.Height; y++) {
@@ -42,8 +42,10 @@ namespace uebung07 {
                 }
             }
 
-            mse = squareDiff / (_imageA.Width * _imageA.Height);
-            return mse;
+            pixels = (_imageA.Width * _imageA.Height * 3);
+
+            mse = squareDiff / pixels;
+            return Math.Pow(mse, 0.5d);
         }
 
         public void printMSE() {
