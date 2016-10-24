@@ -22,7 +22,7 @@ namespace uebung06 {
 
         public string generateHuffmanCode() {
             HuffmanTree tree = generateHuffmanTree();
-            Dictionary<char, string> codeTable = tree.generateDictionary();
+            Dictionary<char, string> codeTable = tree.toDictionary();
             string code = "";
 
             foreach (char c in getFileContent(this._inputFilePath)) code += codeTable[c];
@@ -32,20 +32,14 @@ namespace uebung06 {
 
         public HuffmanTree generateHuffmanTree() {
             HuffmanTree tree = new HuffmanTree();
-            HuffmanNode parentNode;
-            HuffmanNode leftNode;
-            HuffmanNode rightNode;
+            HuffmanNode parentNode, leftNode, rightNode;
 
-            PriorityQueue<HuffmanNode> queue = new PriorityQueue<HuffmanNode>();
             string inputFileContent = getFileContent(this._inputFilePath);
             Dictionary<char, uint> dict = getCharAbsFrequency(inputFileContent);
+            PriorityQueue<HuffmanNode> queue = initPriorityQueue(dict); // init
 
-            foreach (char key in dict.Keys) {
-                queue.Enqueue(new HuffmanNode(dict[key], key, true));
-                // Console.WriteLine("Data: {0}, Char: {1}", dict[key], key);
-            }
-
-            while (queue.Count() > 1) {
+            while (queue.Count() > 1) // tree
+            {
                 leftNode = queue.Dequeue();
                 rightNode = queue.Dequeue();
                 parentNode = new HuffmanNode(leftNode.data + rightNode.data, new char(), false);
@@ -59,10 +53,22 @@ namespace uebung06 {
             return tree;
         }
 
+        private PriorityQueue<HuffmanNode> initPriorityQueue(Dictionary<char, uint> dict) {
+            PriorityQueue<HuffmanNode> queue = new PriorityQueue<HuffmanNode>();
+
+            foreach (char key in dict.Keys)
+            {
+                queue.Enqueue(new HuffmanNode(dict[key], key, true));
+                // Console.WriteLine("Data: {0}, Char: {1}", dict[key], key);
+            }
+            return queue;
+        }
+
         private Dictionary<char, uint> getCharAbsFrequency(string input) {
             Dictionary<char, uint> dict = new Dictionary<char, uint>();
 
-            foreach (char c in input) {
+            foreach (char c in input)
+            {
                 if (!dict.ContainsKey(c)) dict.Add(c, 1);
                 else dict[c]++;
             }

@@ -12,46 +12,29 @@ using System.Threading.Tasks;
 using System.IO;
 
 namespace uebung06 {
-    class HuffmanNode : IComparable {
-        public HuffmanNode leftChild;
-        public HuffmanNode rightChild;
-        public string path;
-        public bool isLeaf;
-
-        public uint data; // frequency
-        public char charA;
-
-        public HuffmanNode(uint data, char charA, bool isLeaf) {
-            this.data = data;
-            this.charA = charA;
-            this.isLeaf = isLeaf;
-        }
-
-        public int CompareTo(object obj) {
-            HuffmanNode other = (HuffmanNode)obj;
-            return this.data.CompareTo(other.data);
-        }
-    }
-
     class HuffmanTree {
         public HuffmanNode root;
 
-        public Dictionary<char, string> generateDictionary() {
+        public Dictionary<char, string> toDictionary() {
             Dictionary<char, string> dict = new Dictionary<char, string>();
             Stack<HuffmanNode> nodeStack = new Stack<HuffmanNode>();
             HuffmanNode currentNode;
 
             nodeStack.Push(root);
 
-            while (!(nodeStack.Count == 0)) {
+            while (!(nodeStack.Count == 0))
+            {
                 currentNode = nodeStack.Pop();
                 if (currentNode.isLeaf) dict.Add(currentNode.charA, currentNode.path);
-                else {
-                    if (currentNode.leftChild != null) {
+                else
+                {
+                    if (currentNode.leftChild != null)
+                    {
                         currentNode.leftChild.path = currentNode.path + '0';
                         nodeStack.Push(currentNode.leftChild);
                     }
-                    if (currentNode.rightChild != null) {
+                    if (currentNode.rightChild != null)
+                    {
                         currentNode.rightChild.path = currentNode.path + '1';
                         nodeStack.Push(currentNode.rightChild);
                     }

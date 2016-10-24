@@ -14,37 +14,33 @@ using ObSi;
 
 namespace uebung07 {
     class MSECalculator {
-        private string _inputFilePath1, _inputFilePath2;
-        Bitmap _imageA;
-        Bitmap _imageB;
+        Bitmap _imageA, _imageB;
 
         public MSECalculator(string filePath1, string filePath2) {
-            this._inputFilePath1 = filePath1;
-            this._inputFilePath2 = filePath1;
-            _imageA = (Bitmap) FileIO.getImageFromFile(filePath1);
-            _imageB = (Bitmap) FileIO.getImageFromFile(filePath2);
+            _imageA = (Bitmap)FileIO.getImageFromFile(filePath1);
+            _imageB = (Bitmap)FileIO.getImageFromFile(filePath2);
         }
 
         public double calculateMSE() {
             double diffRed, diffGreen, diffBlue, squareDiff = 0, mse = 0, pixels;
 
-            for (int x = 0; x < _imageA.Width; x++) {
-                for(int y = 0; y < _imageA.Height; y++) {
+            for (int x = 0; x < _imageA.Width; x++)
+            {
+                for (int y = 0; y < _imageA.Height; y++)
+                {
                     Color colorA = _imageA.GetPixel(x, y);
                     Color colorB = _imageB.GetPixel(x, y);
 
                     diffRed = Math.Abs(colorA.R - colorB.R);
                     diffGreen = Math.Abs(colorA.G - colorB.G);
                     diffBlue = Math.Abs(colorA.B - colorB.B);
-                    //if ((diffBlue != 255) || (diffGreen != 255) || (diffBlue != 255)) Console.WriteLine("NONONO");
-
                     squareDiff += Math.Pow(diffRed, 2) + Math.Pow(diffGreen, 2) + Math.Pow(diffBlue, 2);
                 }
             }
 
             pixels = (_imageA.Width * _imageA.Height * 3);
-
             mse = squareDiff / pixels;
+
             return Math.Pow(mse, 0.5d);
         }
 
