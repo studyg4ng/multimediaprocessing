@@ -15,7 +15,7 @@ using ObSi;
 
 namespace uebung09 {
     interface IManipulate {
-        void manipulateAndSafe(string destPath);
+        void manipulateAndSafe();
     }
 }
 

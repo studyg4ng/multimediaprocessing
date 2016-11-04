@@ -24,32 +24,32 @@ namespace uebung09 {
             else return ImageFactory._factory;
         }
 
-        public static void manipulateImage(string srcPath, string destPath, string manipulationType) {
+        public void manipulateImage(string srcPath, string manipulationType) {
             switch (manipulationType) {
                 case "1":
-                    IManipulate inverter = new InvertImage(srcPath);
-                    inverter.manipulateAndSafe(destPath);
+                    IManipulate inverter = new ImageInverter(srcPath);
+                    inverter.manipulateAndSafe();
                     break;
                 case "2":
-                    clamp(srcPath, destPath);
+                    clamp(srcPath);
                     break;
                 case "3":
-                    multiplyBy4AndClamp(srcPath, destPath);
+                    multiplyBy4AndClamp(srcPath);
                     break;
                 case "4":
-                    quantBy16(srcPath, destPath);
+                    quantBy16(srcPath);
                     break;
                 case "5":
-                    threshouldWith128(srcPath, destPath);
+                    threshouldWith128(srcPath);
                     break;
                 default:
                     break;
             }
         }
 
-        public static void clamp(string srcPath, string destPath) { }
-        public static void multiplyBy4AndClamp(string srcPath, string destPath) { }
-        public static void quantBy16(string srcPath, string destPath) { }
-        public static void threshouldWith128(string srcPath, string destPath) { }
+        public void clamp(string srcPath) { }
+        public void multiplyBy4AndClamp(string srcPath) { }
+        public void quantBy16(string srcPath) { }
+        public void threshouldWith128(string srcPath) { }
     }
 }

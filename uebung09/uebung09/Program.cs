@@ -15,10 +15,10 @@ using System.Drawing;
 namespace uebung09 {
     class Program {
         static void Main(string[] args) {
-            Console.WriteLine("Syntax: <number> <img1>");
-            ImageFactory.getInstace();
+            // Console.WriteLine("Syntax: <number> <img1>");
+            ImageFactory imageFactory = ImageFactory.getInstace();
 
-            ImageFactory.manipulateImage("../../media/lion.jpg", "../../media/lion_inverted.jpg", "1");
+            imageFactory.manipulateImage("../../media/lion.jpg", "1");
         }
     }
 }

@@ -14,10 +14,10 @@ using System.Drawing;
 using ObSi;
 
 namespace uebung09 {
-    class InvertImage : IManipulate {
+    class ImageInverter : IManipulate {
         private Bitmap _bitmap;
 
-        public InvertImage(string srcPath) {
+        public ImageInverter(string srcPath) {
             this._bitmap = (Bitmap)FileIO.getImageFromFile2(srcPath);
         }
 
@@ -43,9 +43,9 @@ namespace uebung09 {
             return bitmap;
         }
 
-        public void manipulateAndSafe(string destPath) {
+        public void manipulateAndSafe() {
             Bitmap invertedBitmap = invertImage();
-            invertedBitmap.Save(destPath);
+            invertedBitmap.Save("../../media/out.png");
         }
     }
 }
