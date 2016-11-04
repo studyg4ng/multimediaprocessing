@@ -9,10 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObSi;
+using System.Drawing;
 
 namespace uebung09 {
     class Program {
         static void Main(string[] args) {
+            Console.WriteLine("Syntax: <number> <img1>");
+            ImageEditor editor = new ImageEditor("../../media/lion.jpg", "../../media/lion_inverted.jpg");
         }
     }
 }
