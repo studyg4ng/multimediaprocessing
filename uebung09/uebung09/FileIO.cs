@@ -25,7 +25,7 @@ namespace ObSi {
             else throw new FileNotFoundException(String.Format("File [{0}] not Found!", filePath));
         }
 
-        public static Image getImageFromFile2(string filePath) {
+        public static Image getImageFromFilePath(string filePath) {
             if (File.Exists(filePath)) {
                 Image img = Image.FromFile(filePath);
                 return img;

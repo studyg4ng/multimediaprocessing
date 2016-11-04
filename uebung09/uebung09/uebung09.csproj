@@ -44,10 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InvertImage.cs" />
-    <Compile Include="IManipulate.cs" />
+    <Compile Include="Clamp.cs" />
+    <Compile Include="Threshold.cs" />
+    <Compile Include="UniformQuantize.cs" />
+    <Compile Include="MultiplyAndClamp.cs" />
+    <Compile Include="Invert.cs" />
+    <Compile Include="Filter.cs" />
     <Compile Include="FileIO.cs" />
-    <Compile Include="ImageFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

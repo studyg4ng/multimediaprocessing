@@ -14,8 +14,11 @@ using System.Drawing;
 using ObSi;
 
 namespace uebung09 {
-    interface IManipulate {
-        void manipulateAndSafe();
+    class Invert : Filter {
+        public Invert(string srcPath) : base(srcPath) { }
+
+        public override Color filterPixel(byte r, byte g, byte b) {
+            return Color.FromArgb((255 - r), (255 - g), (255 - b));
+        }
     }
 }
-
