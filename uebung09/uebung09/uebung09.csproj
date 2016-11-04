@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InvertImage.cs" />
+    <Compile Include="IManipulate.cs" />
     <Compile Include="FileIO.cs" />
     <Compile Include="ImageFactory.cs" />
     <Compile Include="Program.cs" />

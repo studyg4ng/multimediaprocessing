@@ -16,7 +16,9 @@ namespace uebung09 {
     class Program {
         static void Main(string[] args) {
             Console.WriteLine("Syntax: <number> <img1>");
-            ImageEditor editor = new ImageEditor("../../media/lion.jpg", "../../media/lion_inverted.jpg");
+            ImageFactory.getInstace();
+
+            ImageFactory.manipulateImage("../../media/lion.jpg", "../../media/lion_inverted.jpg", "1");
         }
     }
 }

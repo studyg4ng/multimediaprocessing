@@ -14,36 +14,42 @@ using System.Drawing;
 using System.Media;
 
 namespace uebung09 {
-    class ImageEditor {
-        private Bitmap _image;
-        private string _destPath;
+    class ImageFactory {
+        private static ImageFactory _factory;
 
-        public ImageEditor(string srcPath, string destPath) {
-            this._image = (Bitmap)FileIO.getImageFromFile(srcPath);
-            this._destPath = destPath;
+        private ImageFactory() { }
+
+        public static ImageFactory getInstace() {
+            if (ImageFactory._factory == null) return ImageFactory._factory = new ImageFactory();
+            else return ImageFactory._factory;
         }
 
-        public Bitmap getInvertedBitmapFromImage() {
-            Bitmap invertedBitmap = new Bitmap(this._image.Width, this._image.Height);
-            byte inverted_R, inverted_G, inverted_B;
-            Color pixelCol, invertedPixelColor;
-
-            for (int x = 0; x < _image.Width; x++) {
-                for (int y = 0; y < _image.Width; y++) {
-                    pixelCol = _image.GetPixel(x, y);
-                    invertedPixelColor = new Color();
-
-                    inverted_R = (byte)(255 - pixelCol.R);
-                    inverted_G = (byte)(255 - pixelCol.G);
-                    inverted_B = (byte)(255 - pixelCol.B);
-
-                    //invertedPixelColor.
-
-                    //invertedBitmap.SetPixel(x, y, invertedPixelColor);
-                }
+        public static void manipulateImage(string srcPath, string destPath, string manipulationType) {
+            switch (manipulationType) {
+                case "1":
+                    IManipulate inverter = new InvertImage(srcPath);
+                    inverter.manipulateAndSafe(destPath);
+                    break;
+                case "2":
+                    clamp(srcPath, destPath);
+                    break;
+                case "3":
+                    multiplyBy4AndClamp(srcPath, destPath);
+                    break;
+                case "4":
+                    quantBy16(srcPath, destPath);
+                    break;
+                case "5":
+                    threshouldWith128(srcPath, destPath);
+                    break;
+                default:
+                    break;
             }
-
-            return invertedBitmap;
         }
+
+        public static void clamp(string srcPath, string destPath) { }
+        public static void multiplyBy4AndClamp(string srcPath, string destPath) { }
+        public static void quantBy16(string srcPath, string destPath) { }
+        public static void threshouldWith128(string srcPath, string destPath) { }
     }
 }
