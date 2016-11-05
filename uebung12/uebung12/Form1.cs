@@ -1,7 +1,14 @@
-﻿using System;
+﻿/*1510601027 fhs38532
+  Thomas Siller
+  -------------------
+  1510601032 fhs38596
+  Patrick Obermüller*/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -66,9 +73,12 @@ namespace uebung12
 
         private void rbClamp_CheckedChanged(object sender, EventArgs e)
         {
+            // this.progressTimer.Start();
+            // this.progressBarImageLoad.Show();
             pleaseWait();
             updateFilterImage(new Clamp(_filePath, 100, 150).invertImage());
             pleaseWait();
+            this.progressBarImageLoad.Hide();
         }
 
         private void rbThreshold_CheckedChanged(object sender, EventArgs e)
@@ -112,6 +122,38 @@ namespace uebung12
             pleaseWait();
             updateFilterImage(new GRB(_filePath).invertImage());
             pleaseWait();
+        }
+
+        private void lbAuthors_Click(object sender, EventArgs e) {
+
+        }
+
+        private void lbLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            Process.Start("http://www.fh-salzburg.ac.at/");
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e) {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e) {
+             // this.progressBarImageLoad.Increment(1);
+        }
+
+        private void label2_Click(object sender, EventArgs e) {
+
+        }
+
+        private void gbFilters_Enter(object sender, EventArgs e) {
+
+        }
+
+        private void pbFilter_Click(object sender, EventArgs e) {
+
+        }
+
+        private void progressBar1_Click_1(object sender, EventArgs e) {
+
         }
     }
 }

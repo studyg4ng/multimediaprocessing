@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*1510601027 fhs38532
+  Thomas Siller
+  -------------------
+  1510601032 fhs38596
+  Patrick Obermüller*/
+
+// how to set a custom application icon https://www.youtube.com/watch?v=oGkRAprmBdY
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
