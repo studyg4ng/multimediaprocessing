@@ -60,6 +60,7 @@ namespace uebung12
                 txtImagePath.Text = _filePath;
                 pbOriginal.ImageLocation = _filePath;
                 pbOriginal.Update();
+                gbFilters.Enabled = true;
             }
         }
 
@@ -74,6 +75,42 @@ namespace uebung12
         {
             pleaseWait();
             updateFilterImage(new Threshold(_filePath, 128).invertImage());
+            pleaseWait();
+        }
+
+        private void rbInvert_CheckedChanged(object sender, EventArgs e) {
+            pleaseWait();
+            updateFilterImage(new Invert(_filePath).invertImage());
+            pleaseWait();
+        }
+
+        private void rbQuantiz_CheckedChanged(object sender, EventArgs e) {
+            pleaseWait();
+            updateFilterImage(new UniformQuantize(_filePath,16,16).invertImage());
+            pleaseWait();
+        }
+
+        private void rbMultiplyAndClamp_CheckedChanged(object sender, EventArgs e) {
+            pleaseWait();
+            updateFilterImage(new MultiplyAndClamp(_filePath, 4, 2, 253).invertImage());
+            pleaseWait();
+        }
+
+        private void rbChannel_CheckedChanged(object sender, EventArgs e) {
+            pleaseWait();
+            updateFilterImage(new Channel(_filePath, ChannelColor.BLUE).invertImage());
+            pleaseWait();
+        }
+
+        private void rbGrayScale_CheckedChanged(object sender, EventArgs e) {
+            pleaseWait();
+            updateFilterImage(new GrayScale(_filePath).invertImage());
+            pleaseWait();
+        }
+
+        private void rbGRB_CheckedChanged(object sender, EventArgs e) {
+            pleaseWait();
+            updateFilterImage(new GRB(_filePath).invertImage());
             pleaseWait();
         }
     }

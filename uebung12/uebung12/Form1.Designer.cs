@@ -36,9 +36,15 @@
             this.txtImagePath = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.gbFilters = new System.Windows.Forms.GroupBox();
-            this.rbClamp = new System.Windows.Forms.RadioButton();
             this.rbThreshold = new System.Windows.Forms.RadioButton();
+            this.rbClamp = new System.Windows.Forms.RadioButton();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.rbInvert = new System.Windows.Forms.RadioButton();
+            this.rbQuantiz = new System.Windows.Forms.RadioButton();
+            this.rbMultiplyAndClamp = new System.Windows.Forms.RadioButton();
+            this.rbChannel = new System.Windows.Forms.RadioButton();
+            this.rbGrayScale = new System.Windows.Forms.RadioButton();
+            this.rbGRB = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pbOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFilter)).BeginInit();
             this.gbFilters.SuspendLayout();
@@ -94,6 +100,7 @@
             // 
             // txtImagePath
             // 
+            this.txtImagePath.Enabled = false;
             this.txtImagePath.Location = new System.Drawing.Point(12, 14);
             this.txtImagePath.Name = "txtImagePath";
             this.txtImagePath.Size = new System.Drawing.Size(443, 20);
@@ -105,26 +112,21 @@
             // 
             // gbFilters
             // 
+            this.gbFilters.Controls.Add(this.rbGRB);
+            this.gbFilters.Controls.Add(this.rbGrayScale);
+            this.gbFilters.Controls.Add(this.rbChannel);
+            this.gbFilters.Controls.Add(this.rbMultiplyAndClamp);
+            this.gbFilters.Controls.Add(this.rbQuantiz);
+            this.gbFilters.Controls.Add(this.rbInvert);
             this.gbFilters.Controls.Add(this.rbThreshold);
             this.gbFilters.Controls.Add(this.rbClamp);
+            this.gbFilters.Enabled = false;
             this.gbFilters.Location = new System.Drawing.Point(12, 40);
             this.gbFilters.Name = "gbFilters";
             this.gbFilters.Size = new System.Drawing.Size(606, 164);
             this.gbFilters.TabIndex = 6;
             this.gbFilters.TabStop = false;
             this.gbFilters.Text = "Filter";
-            // 
-            // rbClamp
-            // 
-            this.rbClamp.AutoSize = true;
-            this.rbClamp.Location = new System.Drawing.Point(6, 19);
-            this.rbClamp.Name = "rbClamp";
-            this.rbClamp.Size = new System.Drawing.Size(53, 17);
-            this.rbClamp.TabIndex = 0;
-            this.rbClamp.TabStop = true;
-            this.rbClamp.Text = "clamp";
-            this.rbClamp.UseVisualStyleBackColor = true;
-            this.rbClamp.CheckedChanged += new System.EventHandler(this.rbClamp_CheckedChanged);
             // 
             // rbThreshold
             // 
@@ -138,12 +140,96 @@
             this.rbThreshold.UseVisualStyleBackColor = true;
             this.rbThreshold.CheckedChanged += new System.EventHandler(this.rbThreshold_CheckedChanged);
             // 
+            // rbClamp
+            // 
+            this.rbClamp.AutoSize = true;
+            this.rbClamp.Location = new System.Drawing.Point(6, 19);
+            this.rbClamp.Name = "rbClamp";
+            this.rbClamp.Size = new System.Drawing.Size(53, 17);
+            this.rbClamp.TabIndex = 0;
+            this.rbClamp.TabStop = true;
+            this.rbClamp.Text = "clamp";
+            this.rbClamp.UseVisualStyleBackColor = true;
+            this.rbClamp.CheckedChanged += new System.EventHandler(this.rbClamp_CheckedChanged);
+            // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(12, 210);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(606, 10);
             this.progressBar1.TabIndex = 7;
+            // 
+            // rbInvert
+            // 
+            this.rbInvert.AutoSize = true;
+            this.rbInvert.Location = new System.Drawing.Point(6, 65);
+            this.rbInvert.Name = "rbInvert";
+            this.rbInvert.Size = new System.Drawing.Size(51, 17);
+            this.rbInvert.TabIndex = 2;
+            this.rbInvert.TabStop = true;
+            this.rbInvert.Text = "invert";
+            this.rbInvert.UseVisualStyleBackColor = true;
+            this.rbInvert.CheckedChanged += new System.EventHandler(this.rbInvert_CheckedChanged);
+            // 
+            // rbQuantiz
+            // 
+            this.rbQuantiz.AutoSize = true;
+            this.rbQuantiz.Location = new System.Drawing.Point(6, 89);
+            this.rbQuantiz.Name = "rbQuantiz";
+            this.rbQuantiz.Size = new System.Drawing.Size(59, 17);
+            this.rbQuantiz.TabIndex = 3;
+            this.rbQuantiz.TabStop = true;
+            this.rbQuantiz.Text = "quantiz";
+            this.rbQuantiz.UseVisualStyleBackColor = true;
+            this.rbQuantiz.CheckedChanged += new System.EventHandler(this.rbQuantiz_CheckedChanged);
+            // 
+            // rbMultiplyAndClamp
+            // 
+            this.rbMultiplyAndClamp.AutoSize = true;
+            this.rbMultiplyAndClamp.Location = new System.Drawing.Point(6, 113);
+            this.rbMultiplyAndClamp.Name = "rbMultiplyAndClamp";
+            this.rbMultiplyAndClamp.Size = new System.Drawing.Size(105, 17);
+            this.rbMultiplyAndClamp.TabIndex = 4;
+            this.rbMultiplyAndClamp.TabStop = true;
+            this.rbMultiplyAndClamp.Text = "multiplyandclamp";
+            this.rbMultiplyAndClamp.UseVisualStyleBackColor = true;
+            this.rbMultiplyAndClamp.CheckedChanged += new System.EventHandler(this.rbMultiplyAndClamp_CheckedChanged);
+            // 
+            // rbChannel
+            // 
+            this.rbChannel.AutoSize = true;
+            this.rbChannel.Location = new System.Drawing.Point(127, 19);
+            this.rbChannel.Name = "rbChannel";
+            this.rbChannel.Size = new System.Drawing.Size(63, 17);
+            this.rbChannel.TabIndex = 5;
+            this.rbChannel.TabStop = true;
+            this.rbChannel.Text = "channel";
+            this.rbChannel.UseVisualStyleBackColor = true;
+            this.rbChannel.CheckedChanged += new System.EventHandler(this.rbChannel_CheckedChanged);
+            // 
+            // rbGrayScale
+            // 
+            this.rbGrayScale.AutoSize = true;
+            this.rbGrayScale.Location = new System.Drawing.Point(127, 42);
+            this.rbGrayScale.Name = "rbGrayScale";
+            this.rbGrayScale.Size = new System.Drawing.Size(70, 17);
+            this.rbGrayScale.TabIndex = 6;
+            this.rbGrayScale.TabStop = true;
+            this.rbGrayScale.Text = "grayscale";
+            this.rbGrayScale.UseVisualStyleBackColor = true;
+            this.rbGrayScale.CheckedChanged += new System.EventHandler(this.rbGrayScale_CheckedChanged);
+            // 
+            // rbGRB
+            // 
+            this.rbGRB.AutoSize = true;
+            this.rbGRB.Location = new System.Drawing.Point(127, 66);
+            this.rbGRB.Name = "rbGRB";
+            this.rbGRB.Size = new System.Drawing.Size(40, 17);
+            this.rbGRB.TabIndex = 7;
+            this.rbGRB.TabStop = true;
+            this.rbGRB.Text = "grb";
+            this.rbGRB.UseVisualStyleBackColor = true;
+            this.rbGRB.CheckedChanged += new System.EventHandler(this.rbGRB_CheckedChanged);
             // 
             // Form1
             // 
@@ -182,6 +268,12 @@
         private System.Windows.Forms.RadioButton rbThreshold;
         private System.Windows.Forms.RadioButton rbClamp;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.RadioButton rbInvert;
+        private System.Windows.Forms.RadioButton rbQuantiz;
+        private System.Windows.Forms.RadioButton rbMultiplyAndClamp;
+        private System.Windows.Forms.RadioButton rbChannel;
+        private System.Windows.Forms.RadioButton rbGrayScale;
+        private System.Windows.Forms.RadioButton rbGRB;
     }
 }
 
