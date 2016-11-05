@@ -14,12 +14,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace uebung12
-{
-    public partial class PleaseWaitForm : Form
-    {
-        public PleaseWaitForm()
-        {
+namespace uebung12 {
+    public partial class PleaseWaitForm : Form {
+        public PleaseWaitForm() {
             InitializeComponent();
             this.timer1.Start();
         }

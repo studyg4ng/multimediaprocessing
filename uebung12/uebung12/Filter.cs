@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using ObSi;
+using System.ComponentModel;
 
 namespace uebung12 {
     abstract class Filter {

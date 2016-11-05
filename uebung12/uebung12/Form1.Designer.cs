@@ -49,7 +49,6 @@
             this.lbAuthors = new System.Windows.Forms.Label();
             this.lbLink = new System.Windows.Forms.LinkLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.progressBarImageLoad = new System.Windows.Forms.ProgressBar();
             this.progressTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFilter)).BeginInit();
@@ -117,7 +116,6 @@
             // 
             // gbFilters
             // 
-            this.gbFilters.Controls.Add(this.progressBarImageLoad);
             this.gbFilters.Controls.Add(this.dateTimePicker1);
             this.gbFilters.Controls.Add(this.rbGRB);
             this.gbFilters.Controls.Add(this.rbGrayScale);
@@ -128,9 +126,9 @@
             this.gbFilters.Controls.Add(this.rbThreshold);
             this.gbFilters.Controls.Add(this.rbClamp);
             this.gbFilters.Enabled = false;
-            this.gbFilters.Location = new System.Drawing.Point(12, 39);
+            this.gbFilters.Location = new System.Drawing.Point(12, 43);
             this.gbFilters.Name = "gbFilters";
-            this.gbFilters.Size = new System.Drawing.Size(606, 156);
+            this.gbFilters.Size = new System.Drawing.Size(606, 146);
             this.gbFilters.TabIndex = 6;
             this.gbFilters.TabStop = false;
             this.gbFilters.Text = "Filter";
@@ -264,16 +262,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // progressBarImageLoad
-            // 
-            this.progressBarImageLoad.Location = new System.Drawing.Point(0, 145);
-            this.progressBarImageLoad.Name = "progressBarImageLoad";
-            this.progressBarImageLoad.Size = new System.Drawing.Size(606, 10);
-            this.progressBarImageLoad.Step = 0;
-            this.progressBarImageLoad.TabIndex = 10;
-            this.progressBarImageLoad.Visible = false;
-            this.progressBarImageLoad.Click += new System.EventHandler(this.progressBar1_Click_1);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,7 +309,6 @@
         private System.Windows.Forms.Label lbAuthors;
         private System.Windows.Forms.LinkLabel lbLink;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ProgressBar progressBarImageLoad;
         private System.Windows.Forms.Timer progressTimer;
     }
 }

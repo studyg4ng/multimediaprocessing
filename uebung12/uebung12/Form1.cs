@@ -16,24 +16,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace uebung12
-{
-    public partial class Form1 : Form
-    {
+namespace uebung12 {
+    public partial class Form1 : Form {
         private string _filePath;
         private PleaseWaitForm _pleaseWait;
         private bool _wait = false;
 
-        public Form1()
-        {
+        public Form1() {
             InitializeComponent();
         }
 
-        private void pleaseWait()
-        {
-            if(_pleaseWait == null) _pleaseWait = new PleaseWaitForm();
-            if (_wait)
-            {
+        private void pleaseWait() {
+            if (_pleaseWait == null) _pleaseWait = new PleaseWaitForm();
+            if (_wait) {
                 _wait = false;
                 _pleaseWait.Hide();
             }
@@ -41,27 +36,22 @@ namespace uebung12
                 _wait = true;
                 _pleaseWait.Show();
             }
-            
         }
 
-        private void updateFilterImage(Bitmap filteredImage)
-        {
+        private void updateFilterImage(Bitmap filteredImage) {
             pbFilter.Image = filteredImage;
             pbFilter.Update();
         }
 
-        private void btnImageSelect_Click(object sender, EventArgs e)
-        {
+        private void btnImageSelect_Click(object sender, EventArgs e) {
             DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
             if (result == DialogResult.OK) // Test result.
             {
                 _filePath = openFileDialog1.FileName;
-                try
-                {
+                try {
                     string text = File.ReadAllText(_filePath);
                 }
-                catch (IOException)
-                {
+                catch (IOException) {
                     MessageBox.Show("Error");
                 }
                 txtImagePath.Text = _filePath;
@@ -71,18 +61,13 @@ namespace uebung12
             }
         }
 
-        private void rbClamp_CheckedChanged(object sender, EventArgs e)
-        {
-            // this.progressTimer.Start();
-            // this.progressBarImageLoad.Show();
+        private void rbClamp_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
             updateFilterImage(new Clamp(_filePath, 100, 150).invertImage());
             pleaseWait();
-            this.progressBarImageLoad.Hide();
         }
 
-        private void rbThreshold_CheckedChanged(object sender, EventArgs e)
-        {
+        private void rbThreshold_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
             updateFilterImage(new Threshold(_filePath, 128).invertImage());
             pleaseWait();
@@ -96,7 +81,7 @@ namespace uebung12
 
         private void rbQuantiz_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
-            updateFilterImage(new UniformQuantize(_filePath,16,16).invertImage());
+            updateFilterImage(new UniformQuantize(_filePath, 16, 16).invertImage());
             pleaseWait();
         }
 
@@ -137,7 +122,7 @@ namespace uebung12
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
-             // this.progressBarImageLoad.Increment(1);
+            // this.progressBarImageLoad.Increment(1);
         }
 
         private void label2_Click(object sender, EventArgs e) {

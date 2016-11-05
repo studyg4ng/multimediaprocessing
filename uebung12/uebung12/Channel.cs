@@ -24,7 +24,7 @@ namespace uebung12 {
         }
 
         public override Color filterPixel(byte r, byte g, byte b) {
-            switch(this._channel) {
+            switch (this._channel) {
                 case ChannelColor.RED:
                     g = (byte)0;
                     b = (byte)0;
