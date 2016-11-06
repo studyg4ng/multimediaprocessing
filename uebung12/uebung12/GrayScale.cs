@@ -15,10 +15,10 @@ using ObSi;
 
 namespace uebung12 {
     class GrayScale : Filter {
-        public GrayScale(string srcPath) : base(srcPath) {}
+        public GrayScale(string srcPath) : base(srcPath) { }
 
         public override Color filterPixel(byte r, byte g, byte b) {
-            byte grayScale = (byte) ((r * 0.3) + (g * 0.59) + (b * 0.11));
+            byte grayScale = (byte)((r * 0.3) + (g * 0.59) + (b * 0.11));
             return Color.FromArgb(grayScale, grayScale, grayScale);
         }
     }

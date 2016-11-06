@@ -15,7 +15,7 @@ using ObSi;
 
 namespace uebung12 {
     class GRB : Filter {
-        public GRB(string srcPath) : base(srcPath) {}
+        public GRB(string srcPath) : base(srcPath) { }
 
         public override Color filterPixel(byte r, byte g, byte b) {
             byte tmp = r;
