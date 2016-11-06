@@ -19,8 +19,8 @@ namespace uebung10 {
             Console.ForegroundColor = ConsoleColor.White;
             while (1 == 1) {
                 // introduction
-                Console.WriteLine("Welcome to the ImageEditor! Type in 1, 2, 3, 4 or 5 to choose the filter.");
-                Console.WriteLine("Invert (1), Clamp (2), MultiplyAndClamp (3), UniformQuantize (4), Threshold (5)");
+                Console.WriteLine("Welcome to the ImageEditor! Type in 1, 2, 3, 4, 5, 6, 7  or 8 to choose the filter.");
+                Console.WriteLine("Invert (1), Clamp (2), MultiplyAndClamp (3), UniformQuantize (4), Threshold (5),  Channel (6), Grayscale(7), GRB(8)");
                 Console.WriteLine("***Press STRG + C to exit program.***");
 
                 // user input
