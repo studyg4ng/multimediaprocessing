@@ -21,7 +21,7 @@ namespace uebung10 {
             this._bitmap = (Bitmap)FileIO.getImageFromFilePath(srcPath);
         }
 
-        public Bitmap invertImage() {
+        public Bitmap filterImage() {
             Bitmap bitmap = new Bitmap(this._bitmap.Width, this._bitmap.Height);
             Color pColor = new Color();
 
