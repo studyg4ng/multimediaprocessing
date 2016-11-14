@@ -68,7 +68,7 @@ namespace uebung09 {
             }
 
             if (filter != null) {
-                saveToFile(filter.invertImage());
+                saveToFile(filter.filterImage());
 
                 Console.WriteLine("Using: {0}-Filter.", filter.GetType().ToString().Substring(filter.GetType().ToString().IndexOf('.') + 1));
                 Console.ForegroundColor = ConsoleColor.DarkCyan;

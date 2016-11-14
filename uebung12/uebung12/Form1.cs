@@ -63,49 +63,49 @@ namespace uebung12 {
 
         private void rbClamp_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
-            updateFilterImage(new Clamp(_filePath, 100, 150).invertImage());
+            updateFilterImage(new Clamp(_filePath, 100, 150).filterImage());
             pleaseWait();
         }
 
         private void rbThreshold_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
-            updateFilterImage(new Threshold(_filePath, 128).invertImage());
+            updateFilterImage(new Threshold(_filePath, 128).filterImage());
             pleaseWait();
         }
 
         private void rbInvert_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
-            updateFilterImage(new Invert(_filePath).invertImage());
+            updateFilterImage(new Invert(_filePath).filterImage());
             pleaseWait();
         }
 
         private void rbQuantiz_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
-            updateFilterImage(new UniformQuantize(_filePath, 16, 16).invertImage());
+            updateFilterImage(new UniformQuantize(_filePath, 16, 16).filterImage());
             pleaseWait();
         }
 
         private void rbMultiplyAndClamp_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
-            updateFilterImage(new MultiplyAndClamp(_filePath, 4, 2, 253).invertImage());
+            updateFilterImage(new MultiplyAndClamp(_filePath, 4, 2, 253).filterImage());
             pleaseWait();
         }
 
         private void rbChannel_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
-            updateFilterImage(new Channel(_filePath, ChannelColor.BLUE).invertImage());
+            updateFilterImage(new Channel(_filePath, ChannelColor.BLUE).filterImage());
             pleaseWait();
         }
 
         private void rbGrayScale_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
-            updateFilterImage(new GrayScale(_filePath).invertImage());
+            updateFilterImage(new GrayScale(_filePath).filterImage());
             pleaseWait();
         }
 
         private void rbGRB_CheckedChanged(object sender, EventArgs e) {
             pleaseWait();
-            updateFilterImage(new GRB(_filePath).invertImage());
+            updateFilterImage(new GRB(_filePath).filterImage());
             pleaseWait();
         }
 
