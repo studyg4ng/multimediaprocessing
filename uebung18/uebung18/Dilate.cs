@@ -7,44 +7,53 @@ using System.Threading.Tasks;
 namespace uebung18
 {
     class Dilate {
-        byte[,] dilateFilter = new byte[3, 3] {
-            { 1, 1, 1 },
-            { 1, 1, 1 },
-            { 1, 1, 1 }
-        };
-        private byte[,] _imageArray;
+        private byte[,] _filter;
 
-        public Dilate(byte[,] imageArray)
+        public Dilate(byte[,] filter)
         {
-            this._imageArray = imageArray;
+            this._filter = filter;
         }
 
-        public byte[,] execute()
+        public byte[,] execute(byte[,] image, byte threshhold = 1)
         {
-            byte[,] dilate = new byte[this._imageArray.GetLength(0), this._imageArray.GetLength(1)];
+            byte[,] filteredImage = new byte[image.GetLength(0), image.GetLength(1)];
 
-            for(int i = 0; i < this._imageArray.GetLength(0) - 1; i++)
+            for (int x = 0; x < image.GetLength(0); x++)
             {
-                for(int j = 0; j < this._imageArray.GetLength(1) - 1; j++)
+                for (int y = 0; y < image.GetLength(1); y++)
                 {
-                    if(this._imageArray[i,j] > 0)
+                    if (image[x, y] >= threshhold)
                     {
-                        dilate[i, j] = 1;
-                        dilate[i - 1, j - 1] = 1;
-                        dilate[i, j - 1] = 1;
-                        dilate[i - 1, j] = 1;
-                        dilate[i + 1, j - 1] = 1;
-                        dilate[i - 1, j + 1] = 1;
-                        dilate[i + 1, j + 1] = 1;
-                        dilate[i + 1, j] = 1;
-                        dilate[i, j + 1] = 1;
+                        setFilterAtPoint(ref filteredImage, x, y);
                     }
                 }
             }
-            return dilate;
+            return filteredImage;
         }
 
+        private byte[,] setFilterAtPoint(ref byte[,]image, int x, int y)
+        {
+            int posX, posY, filterX, filterY;
+            int filterOffset = (this._filter.GetLength(0) - 1) / 2;
+            int filterWidth = this._filter.GetLength(0);
+            int filterHeight = this._filter.GetLength(1);
 
+            for (int offsetX = -filterOffset; offsetX <= filterOffset; offsetX++)
+            {
+                for (int offsetY = -filterOffset; offsetY <= filterOffset; offsetY++)
+                {
+                    posX = x + offsetX; // Image Position
+                    posY = y + offsetY; // Image Position
+                    filterX = filterOffset + offsetX; // Filter Position
+                    filterY = filterOffset + offsetY; // Filter Position
+                    if (posX >= 0 && posX < image.GetLength(0) && posY >= 0 && posY < image.GetLength(0))
+                    {
+                        image[posX, posY] = this._filter[filterX, filterY];
+                    }
+                }
+            }
+            return image;
+        }
     
     }
 }
