@@ -7,36 +7,36 @@ using System.Threading.Tasks;
 namespace uebung19
 {
     class Erode {
-        private byte[,] _structuringElement;
+        private byte[,] _erodeMatrix;
 
-        public Erode(byte[,] structuringElement)
+        public Erode(byte[,] _erodeMatrix)
         {
-            this._structuringElement = structuringElement;
+            this._erodeMatrix = _erodeMatrix;
         }
 
         public byte[,] execute(byte[,] image, byte threshhold = 1)
         {
-            byte[,] filteredImage = new byte[image.GetLength(0), image.GetLength(1)];
+            byte[,] filteredImage = (byte[,]) image.Clone();
 
             for (int x = 0; x < image.GetLength(0); x++)
             {
                 for (int y = 0; y < image.GetLength(1); y++)
                 {
-                    if (image[x, y] >= threshhold)
+                    if (image[x, y] < threshhold)
                     {
-                        setFilterAtPoint(ref filteredImage, x, y);
+                        applyErodeMatrix(ref filteredImage, x, y);
                     }
                 }
             }
             return filteredImage;
         }
 
-        private byte[,] setFilterAtPoint(ref byte[,]image, int x, int y)
+        private byte[,] applyErodeMatrix(ref byte[,]image, int x, int y)
         {
             int posX, posY, filterX, filterY;
-            int filterOffset = (this._structuringElement.GetLength(0) - 1) / 2;
-            int filterWidth = this._structuringElement.GetLength(0);
-            int filterHeight = this._structuringElement.GetLength(1);
+            int filterOffset = (this._erodeMatrix.GetLength(0) - 1) / 2;
+            int filterWidth = this._erodeMatrix.GetLength(0);
+            int filterHeight = this._erodeMatrix.GetLength(1);
 
             for (int offsetX = -filterOffset; offsetX <= filterOffset; offsetX++)
             {
@@ -48,7 +48,11 @@ namespace uebung19
                     filterY = filterOffset + offsetY; // Filter Position
                     if (posX >= 0 && posX < image.GetLength(0) && posY >= 0 && posY < image.GetLength(0))
                     {
-                        image[posX, posY] = this._structuringElement[filterX, filterY];
+                        if(image[posX, posY] > 0 && this._erodeMatrix[filterX, filterY] > 0)
+                        {
+                            image[posX, posY] = 0;
+                            //image[posX, posY] = this._structuringElement[filterX, filterY];
+                        }
                     }
                 }
             }
